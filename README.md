@@ -6,7 +6,7 @@ O projeto consiste em uma estrutura de acervo de filmes, onde é possível regis
 ## Baixar o projeto
 
    ```bash
-   git clone 
+   git clone https://github.com/FabioDouglass/api-filmes
    cd api-filmes
    ```
 
