@@ -3,6 +3,7 @@ from .models import Filme
 from . import db
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import func
+from datetime import datetime
 
 main = Blueprint('main', __name__)
 
@@ -83,16 +84,31 @@ def adicionar_filme():
 
     if not dados or 'titulo' not in dados or 'diretor' not in dados or 'ano' not in dados:
         return jsonify({'erro': 'Campos "titulo", "diretor" e "ano" são obrigatórios'}), 400
-    novo_filme = Filme(titulo=dados['titulo'], diretor=dados['diretor'], ano=dados['ano'], nota=dados.get('nota'))
+    
+    ano = dados.get('ano')
+    if ano is not None:
+        if not isinstance(ano, int):
+            return jsonify({'erro': 'Campo "ano" deve ser um número inteiro'}), 400
+        ano_atual = datetime.now().year
+        if ano < 1800 or ano > ano_atual:
+            return jsonify({'erro': f'Campo "ano" inválido'}), 400
+
+    nota = dados.get('nota')
+    if nota is not None:
+        if not isinstance(nota, int):
+            return jsonify({'erro': 'Campo "nota" deve ser um número inteiro'}), 400
+        if nota < 0 or nota > 5:
+            return jsonify({'erro': 'Campo "nota" deve estar entre 0 e 5'}), 400
+
+    novo_filme = Filme(titulo=dados['titulo'], diretor=dados['diretor'], ano=dados['ano'], nota=nota)
+
     try:
-
-      db.session.add(novo_filme)
-      db.session.commit()
-
-      return jsonify({'mensagem': 'Filme adicionado com sucesso!'}), 201
+        db.session.add(novo_filme)
+        db.session.commit()
+        return jsonify({'mensagem': 'Filme adicionado com sucesso!'}), 201
 
     except IntegrityError:
-      return {"mesage": "Filme já cadastrado!"}, 409
+        return jsonify({'mensagem': 'Filme já cadastrado!'}), 409
 
 #Deletar um filme
 @main.route('/filme/<string:titulo>', methods=['DELETE'])
@@ -242,10 +258,12 @@ def atualizar_nota_filme(titulo):
     if not data or 'nota' not in data:
         return jsonify({'erro': 'Campo "nota" é obrigatório'}), 400
 
-    try:
-        nova_nota = int(data['nota'])
-    except ValueError:
-        return jsonify({'erro': 'Campo "nota" deve ser um número'}), 400
+    nova_nota = int(nova_nota)
+    if nova_nota is not None:
+      if not isinstance(nova_nota, int):
+        return jsonify({'erro': 'Campo "nota" deve ser um número inteiro'}), 400
+      if nova_nota < 0 or nova_nota > 5:
+        return jsonify({'erro': 'Campo "nota" deve estar entre 0 e 5'}), 400
 
     filme.nota = nova_nota
     db.session.commit()

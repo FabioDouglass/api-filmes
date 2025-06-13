@@ -8,4 +8,4 @@ class Filme(db.Model):
     nota = db.Column(db.Integer)
 
     def to_dict(self):
-        return {'id': self.id, 'titulo': self.titulo, 'diretor': self.diretor, 'nota': self.nota}
+        return {'id': self.id, 'titulo': self.titulo, 'diretor': self.diretor, 'ano': self.ano, 'nota': self.nota}
