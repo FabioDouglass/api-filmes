@@ -258,11 +258,11 @@ def atualizar_nota_filme(titulo):
     if not data or 'nota' not in data:
         return jsonify({'erro': 'Campo "nota" é obrigatório'}), 400
 
-    nova_nota = int(nova_nota)
-    if nova_nota is not None:
-      if not isinstance(nova_nota, int):
-        return jsonify({'erro': 'Campo "nota" deve ser um número inteiro'}), 400
-      if nova_nota < 0 or nova_nota > 5:
+    try:
+        nova_nota = int(data['nota'])
+    except ValueError:
+        return jsonify({'erro': 'Campo "nota" deve ser um número'}), 400
+    if nova_nota < 0 or nova_nota > 5:
         return jsonify({'erro': 'Campo "nota" deve estar entre 0 e 5'}), 400
 
     filme.nota = nova_nota
