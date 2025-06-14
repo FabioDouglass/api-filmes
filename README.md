@@ -47,7 +47,7 @@ http://127.0.0.1:5000/filmes
 - **Editar a nota de um filme:**
 
   ```http
-  PATCH /filme{titulo}
+  PATCH /filme/{titulo}
   Body:
   {
     "nota": int
@@ -57,7 +57,7 @@ http://127.0.0.1:5000/filmes
   - **Deletar um filme por título:**
 
   ```http
-  DELETE /filme{titulo}
+  DELETE /filme/{titulo}
   ````
 
 - **Cadastrar um filme:**
