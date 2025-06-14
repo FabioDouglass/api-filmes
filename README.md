@@ -40,14 +40,14 @@ http://127.0.0.1:5000/filmes
 - **Listar um filme por titulo**
 
   ```http
-  GET /filmes?titulo=$titulo
+  GET /filme?titulo=$titulo
 
   ```
 
 - **Editar a nota de um filme:**
 
   ```http
-  PATCH /filmes?titulo=$titulo
+  PATCH /filme{titulo}
   Body:
   {
     "nota": int
@@ -57,7 +57,7 @@ http://127.0.0.1:5000/filmes
   - **Deletar um filme por título:**
 
   ```http
-  DELETE /filmes?titulo=$titulo
+  DELETE /filme{titulo}
   ````
 
 - **Cadastrar um filme:**

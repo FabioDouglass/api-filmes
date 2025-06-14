@@ -114,7 +114,7 @@ def adicionar_filme():
 @main.route('/filme/<string:titulo>', methods=['DELETE'])
 def deletar_filme(titulo):
     """
-    Deletar filme pelo título (corresponde parcialmente, insensível a maiúsculas)
+    Deletar filme pelo título (insensível a maiúsculas)
     ---
     tags:
       - Filmes
@@ -221,7 +221,7 @@ def obter_filme():
 @main.route('/filme/<string:titulo>', methods=['PATCH'])
 def atualizar_nota_filme(titulo):
     """
-    Atualizar a nota do filme pelo título (busca parcial, insensível a maiúsculas)
+    Atualizar a nota do filme pelo título (insensível a maiúsculas)
     ---
     tags:
       - Filmes
