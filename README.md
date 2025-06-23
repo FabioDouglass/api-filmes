@@ -14,7 +14,9 @@ O projeto consiste em uma estrutura de acervo de filmes, onde é possível regis
 
 1. **Instalar as dependências:**
 
+  ```bash
    pip3 install -r requirements.txt
+  ````
 
 2. **Inicie a Aplicação:**
 
