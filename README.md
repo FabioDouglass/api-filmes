@@ -18,6 +18,9 @@ O projeto consiste em uma estrutura de acervo de filmes, onde é possível regis
    pip3 install -r requirements.txt
   ````
 
+OBS: Projeto feito com Python 3.13.2
+
+
 2. **Inicie a Aplicação:**
 
    ```bash
